@@ -1,0 +1,313 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+}
+
+#game-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+    position: relative;
+    background-size: auto;
+    background-color: #a4e2f6;
+    background-image: url(clouds.svg);
+    background-repeat: repeat;
+    background-position: 50% 100%;
+    position: relative;
+    z-index: 0;
+}
+
+html,
+body,
+#game-container {
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    overscroll-behavior: none;
+}
+
+.body,
+.wrapper {
+    /* Break the flow */
+    position: absolute;
+    top: 0px;
+
+    /* Give them all the available space */
+    width: 100%;
+    height: 100%;
+
+    /* Remove the margins if any */
+    margin: 0;
+
+    /* Allow them to scroll down the document */
+    overflow: hidden;
+}
+
+.body {
+    /* Sending body at the bottom of the stack */
+    z-index: 1;
+}
+
+.wrapper {
+    /* Making the wrapper stack above the body */
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+.spelling-words-list {
+    background-color: #ffffac;
+    padding: 1rem 1em;
+    width: 100%;
+    max-width: 400px;
+}
+
+.spelling-words-list ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+.spelling-words-list li {
+    height: 3.5em;
+    margin: 0 -1em;
+    position: relative;
+    border-bottom: 1px gray solid;
+}
+.spelling-word-text {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: top;
+    height: 100%;
+    font-weight: bold;
+}
+.spelling-word-number {
+    height: 100%;
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    margin: 0 1em;
+}
+.spelling-word-line {
+    height: 100%;
+    display: inline-block;
+    width: 6px;
+    vertical-align: top;
+    margin: 0 0.5em;
+    border: 1px red solid;
+    border-top: none;
+    border-bottom: none;
+}
+
+.spelling-word-disabled {
+    color: darkgray;
+}
+.spelling-word-letters {
+    letter-spacing: 0.5rem;
+    font-size: 2rem;
+    color: #900;
+}
+.spelling-word-checkmark {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    color: green;
+    font-size: 2rem;
+}
+
+.stylish-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.stylish-table td,
+.stylish-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.stylish-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.stylish-table tr:hover {
+    background-color: #ddd;
+}
+
+.stylish-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4caf50;
+    color: white;
+}
+.spelling-test-question {
+    text-align: center;
+}
+
+.spelling-test-question input {
+    padding: 1rem;
+}
+
+.reader-button, .game-chooser button {
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #900;
+    color: gold;
+    font-weight: bold;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.word-choice {
+    padding: 0.5rem 2rem;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    border: black 2px solid;
+}
+.word-choice:focus {
+    outline: none;
+}
+.word-choice:hover:not(:disabled) {
+    box-shadow: 0px 2px 2px 0px #ccc;
+}
+.word-choice:disabled {
+    background-color: lightgray;
+    border-color: darkgray;
+    color: darkgray;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+    background-color: transparent;
+    width: 200px;
+    height: 100px;
+    margin: 1rem;
+    display: inline-block;
+    border-radius: 1rem;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    display: inline-flex;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none !important;
+    user-select: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    background: rgb(193, 155, 0);
+    background: linear-gradient(
+        168deg,
+        rgba(193, 155, 0, 1) 0%,
+        rgba(242, 197, 10, 1) 48%,
+        rgba(193, 155, 0, 1) 100%
+    );
+    color: black;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+/* Style the back side */
+.flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    font-size: 2rem;
+    transform: rotateY(180deg);
+}
+
+.audio-word-match {
+    text-align: center;
+    max-width: 800px;
+}
+
+@media all and (-ms-high-contrast: none) {
+    *::-ms-backdrop,
+    .flip-card-back {
+        transform: none;
+        display: none;
+    }
+    *::-ms-backdrop,
+    .flip-card-flipped .flip-card-inner {
+        transform: none;
+    }
+    *::-ms-backdrop,
+    .flip-card-flipped .flip-card-back {
+        display: inline-flex;
+    }
+    *::-ms-backdrop,
+    .flip-card-flipped .flip-card-front {
+        display: none;
+    }
+}
+
+.game-chooser {
+    max-width: 500px;
+    text-align: center;
+}
+.game-chooser button {
+    margin: 0.5rem;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+}
