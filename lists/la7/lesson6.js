@@ -1,0 +1,41 @@
+var list = [
+    'abbreviation',
+    'absolutely',
+    'absorb',
+    'accessible',
+    'achievement',
+    'acres',
+    'adjustable',
+    'admittance',
+    'advice',
+    'advise',
+    'Afghan',
+    'analysis',
+    'analyze',
+    'artificial',
+    'assistance',
+    'association',
+    'attendance',
+    'authority'
+];
+
+var sentences = [
+    "The use of abbreviations is quite common when texting.",
+    "There are absolutely no exceptions to this rule.",
+    "Paper towel can be used to absorb spilled water.",
+    "All subway stations are now accessible.",
+    "This is a great achievement!",
+    "I was able to buy several acres of land.",
+    "The height of this desk is adjustable.",
+    "Admittance to this university is dependant on grades.",
+    "I would like some advice.",
+    "Can you please advise me on this?",
+    "The Afghan fighter looked quite tired.",
+    "My analysis of the situation is that more work needs to be done.",
+    "Please analyze the situation.",
+    "There are too many artificial plants in here.",
+    "He needs assistance.",
+    "I am part of an international association.",
+    "She will now take attendance.",
+    "Who has authority now?"
+]

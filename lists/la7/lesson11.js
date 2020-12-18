@@ -1,0 +1,41 @@
+var list = [
+    'bacteria',
+    'bagel',
+    'benefiting',
+    'bicycle',
+    'biscuit',
+    'bizarre',
+    'boulevard',
+    'bouquet',
+    'bureau',
+    'campaign',
+    'capital',
+    'capitol',
+    'cinnamon',
+    'commotion',
+    'competition',
+    'confetti',
+    'congratulations',
+    'culprit'
+];
+
+var sentences = [
+    "There were several bacteria visible in the microscope.",
+    "I ate a bagel for lunch.",
+    "He does not seem to be benefiting from the treatment.",
+    "I will ride my bicycle later today.",
+    "I found this biscuit in the cupboard.",
+    "That's quite bizarre.",
+    "We live on a small street off the boulevard.",
+    "He brought her a bouquet of flowers.",
+    "I will take this matter to the bureau if necessary.",
+    "We must maintain a strong front during the campaign.",
+    "Toronto is the capital of Ontario.",
+    "The government discussed their response to the situation at the capitol.",
+    "Cinnamon buns are delicious.",
+    "His clownish dancing caused a commotion.",
+    "There was intense competition between the students in his math class.",
+    "Confetti poured down on the two newlyweds.",
+    "There were many words of congratulations.",
+    "I think James is the culprit."
+]

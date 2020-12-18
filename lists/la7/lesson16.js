@@ -1,0 +1,41 @@
+var list = [
+    'deceive',
+    'delayed',
+    'democracy',
+    'deodorant',
+    'description',
+    'diameter',
+    'dismissal',
+    'distinguished',
+    'embarrass',
+    'emphasize',
+    'encircle',
+    'engineer',
+    'evident',
+    'exhibit',
+    'extinct',
+    'extinguish',
+    'extraordinary',
+    'extremely'
+];
+
+var sentences = [
+    "Do not deceive other people.",
+    "Our response may be delayed.",
+    "Democracy is the fairest form of government.",
+    "They are having a sale on deodorant.",
+    "Please read the description.",
+    "This telescope has a small diameter.",
+    "Not following this rule will result in dismissal.",
+    "This is a most distinguished individual.",
+    "Don't embarrass yourself with such poor grammar!",
+    "I would like to emphasize the importance of proper punctuation.",
+    "He was encircled with guilt.",
+    "The negotiator was able to engineer an escape plan.",
+    "It is evident that the man has skill.",
+    "These criminals exhibit a lack of care for others.",
+    "Dinosaurs went extinct a long time ago.",
+    "The firefighers were able to extinguish the fire.",
+    "These are extraordinary circumstances.",
+    "I am extremely grateful to everyone for their patience."
+]
