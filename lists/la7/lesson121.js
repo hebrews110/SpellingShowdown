@@ -1,0 +1,41 @@
+var list = [
+    'fabricate',
+    'fascinating',
+    'flagrant',
+    'foreign',
+    'forfeit',
+    'frequently',
+    'genuine',
+    'gossiping',
+    'grammar',
+    'grievance',
+    'guarantee',
+    'harass',
+    'havoc',
+    'heroic',
+    'horrify',
+    'hospital',
+    'humid',
+    'hygiene'
+];
+
+var sentences = [
+    "I will need to fabricate a story.",
+    "The coral reefs are fascinating.",
+    "This was a flagrant violation of the rules.",
+    "We do not accept foreign currency.",
+    "She chose to forfeit the game.",
+    "I frequently have to remind you about the rules!",
+    "His confusion was genuine.",
+    "Gossiping is not very nice.",
+    "English teachers frequently remind students about grammar.",
+    "What is this latest grievance of yours?",
+    "We offer a 30-day money back guarantee.",
+    "Please don't harass me.",
+    "You are causing havoc!",
+    "His heroic efforts to save the town were applauded.",
+    "You horrify me with this tale!",
+    "He was rushed to the hospital.",
+    "It is humid outside.",
+    "Personal hygiene is important."
+]

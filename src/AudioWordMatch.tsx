@@ -55,6 +55,8 @@ export default function AudioWordMatch() {
     }, [ finished ]);
     
     const onClick = (i) => {
+        if(cardsFlipped.current[i])
+            return;
         cardsFlipped.current[i] = true;
         newlyFlipped.current[i] = true;
         readWord(cards[i]);

@@ -6,6 +6,7 @@ import TestMe from './TestMe';
 import ReadAWord from './ReadAWord';
 import MissingLetter from './MissingLetter';
 import AudioWordMatch from './AudioWordMatch';
+import shuffle from './shuffle';
 
 function getParameterByName(name: string, url = window.location.href): string|null {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -34,6 +35,12 @@ window.onload = function() {
             const gotoGame = (game) => {
                 window.location.href = window.location.href + "&game=" + game;
             };
+            if(game == "AudioWordMatch") {
+                if((window as any).spellingQuestions.length > 9) {
+                    shuffle((window as any).spellingQuestions);
+                    (window as any).spellingQuestions = (window as any).spellingQuestions.slice(0, 9);
+                }
+            }
             if(game == "TeachMe")
                 return <TeachMe/>;
             else if(game == "TestMe")

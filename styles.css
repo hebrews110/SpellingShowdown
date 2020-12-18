@@ -110,7 +110,11 @@ body,
     display: inline-flex;
     vertical-align: top;
     align-items: center;
-    margin: 0 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0.5em;
+    margin-left: 1em;
+    width: 1.5em;
 }
 .spelling-word-line {
     height: 100%;
@@ -213,9 +217,13 @@ body,
     width: 200px;
     height: 100px;
     margin: 1rem;
+    cursor: pointer;
     display: inline-block;
     border-radius: 1rem;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+.flip-card-flipped {
+    cursor: default;
 }
 
 /* This container is needed to position the front and back side */
