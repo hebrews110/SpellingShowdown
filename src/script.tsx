@@ -1,6 +1,6 @@
 
 import ReactDOM from 'react-dom';
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import TeachMe from './TeachMe';
 import TestMe from './TestMe';
 import ReadAWord from './ReadAWord';
@@ -52,6 +52,15 @@ window.onload = function() {
                 return <MissingLetter/>;
             else if(game == "AudioWordMatch")
                 return <AudioWordMatch/>;
+            else if(game == "GenWordSearch") {
+                return <div>
+                    {(window as any).spellingQuestions.map(q => {
+                        const blank = new Array(q.name.length).fill('_').join('');
+                        const sentence = q.sentence.replace(q.name, blank);
+                        return <Fragment key={q.name}><span>{q.name} : {sentence}</span><br/></Fragment>;
+                    })}
+                </div>
+            }
             else
                 return <>
                     <h1>Choose a game:</h1>
