@@ -1,6 +1,6 @@
 
 import ReactDOM from 'react-dom';
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import TeachMe from './TeachMe';
 import TestMe from './TestMe';
 import ReadAWord from './ReadAWord';
@@ -35,10 +35,11 @@ window.onload = function() {
             const gotoGame = (game) => {
                 window.location.href = window.location.href + "&game=" + game;
             };
-            if(game == "AudioWordMatch") {
-                if((window as any).spellingQuestions.length > 9) {
+            if(game == "AudioWordMatch" || game == "TestMe") {
+                var maxQuestions = (game == "AudioWordMatch" ? 9 : 20);
+                if((window as any).spellingQuestions.length > maxQuestions) {
                     shuffle((window as any).spellingQuestions);
-                    (window as any).spellingQuestions = (window as any).spellingQuestions.slice(0, 9);
+                    (window as any).spellingQuestions = (window as any).spellingQuestions.slice(0, maxQuestions);
                 }
             }
             if(game == "TeachMe")
@@ -51,6 +52,15 @@ window.onload = function() {
                 return <MissingLetter/>;
             else if(game == "AudioWordMatch")
                 return <AudioWordMatch/>;
+            else if(game == "GenWordSearch") {
+                return <div>
+                    {(window as any).spellingQuestions.map(q => {
+                        const blank = new Array(q.name.length).fill('_').join('');
+                        const sentence = q.sentence.replace(q.name, blank);
+                        return <Fragment key={q.name}><span>{q.name} : {sentence}</span><br/></Fragment>;
+                    })}
+                </div>
+            }
             else
                 return <>
                     <h1>Choose a game:</h1>

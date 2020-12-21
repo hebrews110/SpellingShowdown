@@ -70,7 +70,7 @@ export default function TestMe() {
             <button className="reader-button" onClick={() => setReady(true)}>Begin</button>
         </>}
         {ready && <>
-            <h3>Type the word you hear into the box below, then click Next.</h3>
+            <h3>({question+1} of {(window as any).spellingQuestions.length}) Type the word you hear into the box below, then click Next.</h3>
             <input type="text" ref={inputRef}/>
             <br/>
             <ReaderButton word={q.name}>Word</ReaderButton>
