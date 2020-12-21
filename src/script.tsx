@@ -35,10 +35,11 @@ window.onload = function() {
             const gotoGame = (game) => {
                 window.location.href = window.location.href + "&game=" + game;
             };
-            if(game == "AudioWordMatch") {
-                if((window as any).spellingQuestions.length > 9) {
+            if(game == "AudioWordMatch" || game == "TestMe") {
+                var maxQuestions = (game == "AudioWordMatch" ? 9 : 20);
+                if((window as any).spellingQuestions.length > maxQuestions) {
                     shuffle((window as any).spellingQuestions);
-                    (window as any).spellingQuestions = (window as any).spellingQuestions.slice(0, 9);
+                    (window as any).spellingQuestions = (window as any).spellingQuestions.slice(0, maxQuestions);
                 }
             }
             if(game == "TeachMe")
