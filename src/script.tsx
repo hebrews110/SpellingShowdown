@@ -6,6 +6,7 @@ import TestMe from './TestMe';
 import ReadAWord from './ReadAWord';
 import MissingLetter from './MissingLetter';
 import AudioWordMatch from './AudioWordMatch';
+import Alphabetize from './Alphabetize';
 import shuffle from './shuffle';
 
 function getParameterByName(name: string, url = window.location.href): string|null {
@@ -35,7 +36,7 @@ window.onload = function() {
             const gotoGame = (game) => {
                 window.location.href = window.location.href + "&game=" + game;
             };
-            if(game == "AudioWordMatch" || game == "TestMe") {
+            if(game == "AudioWordMatch" || game == "TestMe" || game == "Alphabetize") {
                 var maxQuestions = (game == "AudioWordMatch" ? 9 : 20);
                 if((window as any).spellingQuestions.length > maxQuestions) {
                     shuffle((window as any).spellingQuestions);
@@ -60,6 +61,8 @@ window.onload = function() {
                         return <Fragment key={q.name}><span>{q.name} : {sentence}</span><br/></Fragment>;
                     })}
                 </div>
+            } else if(game == "Alphabetize") {
+                return <Alphabetize/>;
             }
             else
                 return <>
@@ -70,6 +73,7 @@ window.onload = function() {
                         <button onClick={() => gotoGame("ReadAWord")}>Read a Word</button>
                         <button onClick={() => gotoGame("MissingLetter")}>Missing Letter</button>
                         <button onClick={() => gotoGame("AudioWordMatch")}>Audio Word Match</button>
+                        <button onClick={() => gotoGame("Alphabetize")}>Alphabetize</button>
                     </div>  
                 </>
         }

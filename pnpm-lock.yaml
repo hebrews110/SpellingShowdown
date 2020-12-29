@@ -3,6 +3,7 @@ dependencies:
   core-js: 3.7.0
   js-queue: 2.0.2
   react: 17.0.1
+  react-beautiful-dnd: 13.0.0_react-dom@17.0.1+react@17.0.1
   react-dom: 17.0.1_react@17.0.1
   talkify-tts: 3.6.0
   use-force-update: 1.0.7
@@ -434,7 +435,6 @@ packages:
   /@babel/runtime/7.12.5:
     dependencies:
       regenerator-runtime: 0.13.7
-    dev: true
     resolution:
       integrity: sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
   /@babel/template/7.10.4:
@@ -1209,6 +1209,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-fz4spIh+znjO2VjL+IdhEpRJ3YN6sMzITSBijk6FK2UvTqruSQW+/cCZTSNsMiZNvUeq0CqurF+dAbyiGOY6Wg==
+  /css-box-model/1.2.1:
+    dependencies:
+      tiny-invariant: 1.1.0
+    dev: false
+    resolution:
+      integrity: sha512-a7Vr4Q/kd/aw96bnJG332W9V9LkJO69JRcaCYDUqjp6/z0w6VcZjgAcTbgFxEPfBgdnAwlh3iwu+hLopa+flJw==
   /csstype/3.0.5:
     dev: true
     resolution:
@@ -1774,6 +1780,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=
+  /hoist-non-react-statics/3.3.2:
+    dependencies:
+      react-is: 16.13.1
+    dev: false
+    resolution:
+      integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
   /homedir-polyfill/1.0.3:
     dependencies:
       parse-passwd: 1.0.0
@@ -2165,6 +2177,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg==
+  /memoize-one/5.1.1:
+    dev: false
+    resolution:
+      integrity: sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
   /memory-fs/0.4.1:
     dependencies:
       errno: 0.1.7
@@ -2543,6 +2559,14 @@ packages:
     dev: true
     resolution:
       integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=
+  /prop-types/15.7.2:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+    dev: false
+    resolution:
+      integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
   /prr/1.0.1:
     dev: true
     resolution:
@@ -2606,6 +2630,10 @@ packages:
       node: '>=0.4.x'
     resolution:
       integrity: sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
+  /raf-schd/4.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-VhlMZmGy6A6hrkJWHLNTGl5gtgMUm+xfGza6wbwnE914yeQ5Ybm18vgM734RZhMgfw4tacUrWseGZlpUrrakEQ==
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -2619,6 +2647,23 @@ packages:
     dev: true
     resolution:
       integrity: sha512-87lcbR8+MhcWcUiQ+9e+Rwx8MyR2P7qnt15ynUlbm3TU/fjbgz4GsvfSUDTemtCCtVCqb4ZcEFlyPNTh9bBTLw==
+  /react-beautiful-dnd/13.0.0_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      '@babel/runtime': 7.12.5
+      css-box-model: 1.2.1
+      memoize-one: 5.1.1
+      raf-schd: 4.0.2
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      react-redux: 7.2.2_380dc38591053d98779d1f25fc7202b9
+      redux: 4.0.5
+      use-memo-one: 1.1.1_react@17.0.1
+    dev: false
+    peerDependencies:
+      react: ^16.8.5
+      react-dom: ^16.8.5
+    resolution:
+      integrity: sha512-87It8sN0ineoC3nBW0SbQuTFXM6bUqM62uJGY4BtTf0yzPl8/3+bHMWkgIe0Z6m8e+gJgjWxefGRVfpE3VcdEg==
   /react-dom/17.0.1_react@17.0.1:
     dependencies:
       loose-envify: 1.4.0
@@ -2630,6 +2675,33 @@ packages:
       react: 17.0.1
     resolution:
       integrity: sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug==
+  /react-is/16.13.1:
+    dev: false
+    resolution:
+      integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+  /react-redux/7.2.2_380dc38591053d98779d1f25fc7202b9:
+    dependencies:
+      '@babel/runtime': 7.12.5
+      hoist-non-react-statics: 3.3.2
+      loose-envify: 1.4.0
+      prop-types: 15.7.2
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      react-is: 16.13.1
+      redux: 4.0.5
+    dev: false
+    peerDependencies:
+      react: ^16.8.3 || ^17
+      react-dom: '*'
+      react-native: '*'
+      redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    resolution:
+      integrity: sha512-8+CQ1EvIVFkYL/vu6Olo7JFLWop1qRUeb46sGtIMDCSpgwPQq8fPLpirIB0iTqFe9XYEFPHssdX8/UwN6pAkEA==
   /react/17.0.1:
     dependencies:
       loose-envify: 1.4.0
@@ -2681,8 +2753,14 @@ packages:
     optional: true
     resolution:
       integrity: sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==
+  /redux/4.0.5:
+    dependencies:
+      loose-envify: 1.4.0
+      symbol-observable: 1.2.0
+    dev: false
+    resolution:
+      integrity: sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
   /regenerator-runtime/0.13.7:
-    dev: true
     resolution:
       integrity: sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
   /regenerator-transform/0.14.5:
@@ -3057,6 +3135,12 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
+  /symbol-observable/1.2.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
   /talkify-tts/3.6.0:
     dev: false
     resolution:
@@ -3112,6 +3196,10 @@ packages:
       node: '>=0.6.0'
     resolution:
       integrity: sha512-9phl76Cqm6FhSX9Xe1ZUAMLtm1BLkKj2Qd5ApyWkXzsMRaA7dgr81kf4wJmQf/hAvg8EEyJxDo3du/0KlhPiKQ==
+  /tiny-invariant/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw==
   /to-arraybuffer/1.0.1:
     dev: true
     resolution:
@@ -3259,6 +3347,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-k5dppYhO+I5X/cd7ildbrzeMZJkWwdAh5adaIk0qKN2euh7J0h2GBGBcB4QZ385eyHHnp7LIygvebdRx3XKdwA==
+  /use-memo-one/1.1.1_react@17.0.1:
+    dependencies:
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      react: ^16.8.0
+    resolution:
+      integrity: sha512-oFfsyun+bP7RX8X2AskHNTxu+R3QdE/RC5IefMbqptmACAA/gfol1KDD5KRzPsGMa62sWxGZw+Ui43u6x4ddoQ==
   /use/3.1.1:
     dev: true
     engines:
@@ -3465,6 +3561,7 @@ specifiers:
   event-hooks-webpack-plugin: ^2.1.5
   js-queue: ^2.0.2
   react: '17'
+  react-beautiful-dnd: ^13.0.0
   react-dom: '17'
   talkify-tts: ^3.6.0
   ts-loader: ^8.0.11

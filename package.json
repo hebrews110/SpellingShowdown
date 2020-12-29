@@ -38,6 +38,7 @@
     "core-js": "^3.6.4",
     "js-queue": "^2.0.2",
     "react": "17",
+    "react-beautiful-dnd": "^13.0.0",
     "react-dom": "17",
     "talkify-tts": "^3.6.0",
     "use-force-update": "^1.0.7"
