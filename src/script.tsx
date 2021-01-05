@@ -8,6 +8,7 @@ import MissingLetter from './MissingLetter';
 import AudioWordMatch from './AudioWordMatch';
 import Alphabetize from './Alphabetize';
 import shuffle from './shuffle';
+import { readWord } from './talking';
 
 function getParameterByName(name: string, url = window.location.href): string|null {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -18,6 +19,12 @@ function getParameterByName(name: string, url = window.location.href): string|nu
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 const list = getParameterByName("list");
+
+function clickFn() {
+    readWord(" ");
+    document.removeEventListener("click", clickFn);
+}
+document.addEventListener("click", clickFn);
 
 window.onload = function() {
     const script = document.createElement("script");

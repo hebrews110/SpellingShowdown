@@ -55,11 +55,24 @@ if('speechSynthesis' in window) {
                     break;
                 }
             }
-            [ "pitch", "rate", "volume", "onend"].forEach(function(val) {
+            [ "pitch", "rate", "volume"].forEach(function(val) {
                 if(typeof parameters[val] != 'undefined')
                     utter[val] = parameters[val];
             });
+            var triggered = false;
+            function onend() {
+                triggered = true;
+                console.log("Hello");
+                if(typeof parameters.onend == 'function')
+                    parameters.onend();
+            }
+            utter.onend = onend;
+            setTimeout(() => {
+                if(!triggered)
+                    onend();
+            }, ((text.split(" ").length / 1.8) * 1000) + 750);
             synth.speak(utter);
+            console.log(synth.speaking);
         },
         cancel: function() {
             synth.cancel();
