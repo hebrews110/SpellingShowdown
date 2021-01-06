@@ -6,7 +6,9 @@ import TestMe from './TestMe';
 import ReadAWord from './ReadAWord';
 import MissingLetter from './MissingLetter';
 import AudioWordMatch from './AudioWordMatch';
+import Alphabetize from './Alphabetize';
 import shuffle from './shuffle';
+import { readWord } from './talking';
 
 function getParameterByName(name: string, url = window.location.href): string|null {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -17,6 +19,12 @@ function getParameterByName(name: string, url = window.location.href): string|nu
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 const list = getParameterByName("list");
+
+function clickFn() {
+    readWord(" ");
+    document.removeEventListener("click", clickFn);
+}
+document.addEventListener("click", clickFn);
 
 window.onload = function() {
     const script = document.createElement("script");
@@ -35,7 +43,7 @@ window.onload = function() {
             const gotoGame = (game) => {
                 window.location.href = window.location.href + "&game=" + game;
             };
-            if(game == "AudioWordMatch" || game == "TestMe") {
+            if(game == "AudioWordMatch" || game == "TestMe" || game == "Alphabetize") {
                 var maxQuestions = (game == "AudioWordMatch" ? 9 : 20);
                 if((window as any).spellingQuestions.length > maxQuestions) {
                     shuffle((window as any).spellingQuestions);
@@ -60,6 +68,8 @@ window.onload = function() {
                         return <Fragment key={q.name}><span>{q.name} : {sentence}</span><br/></Fragment>;
                     })}
                 </div>
+            } else if(game == "Alphabetize") {
+                return <Alphabetize/>;
             }
             else
                 return <>
@@ -70,6 +80,7 @@ window.onload = function() {
                         <button onClick={() => gotoGame("ReadAWord")}>Read a Word</button>
                         <button onClick={() => gotoGame("MissingLetter")}>Missing Letter</button>
                         <button onClick={() => gotoGame("AudioWordMatch")}>Audio Word Match</button>
+                        <button onClick={() => gotoGame("Alphabetize")}>Alphabetize</button>
                     </div>  
                 </>
         }
