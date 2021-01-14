@@ -71,10 +71,10 @@ export default function TestMe() {
         </>}
         {ready && <>
             <h3>({question+1} of {(window as any).spellingQuestions.length}) Type the word you hear into the box below, then click Next.</h3>
-            <input type="text" ref={inputRef}/>
+            <input type="text" ref={inputRef} placeholder="Word" autoComplete="off" autoCapitalize="off" autoCorrect="off"/>
             <br/>
-            <ReaderButton word={q.name}>Word</ReaderButton>
-            <ReaderButton word={q.sentence}>Sentence</ReaderButton>
+            <ReaderButton onClick={() => inputRef.current.focus()} word={q.name}>Word</ReaderButton>
+            <ReaderButton onClick={() => inputRef.current.focus()} word={q.sentence}>Sentence</ReaderButton>
             <button className="reader-button" onClick={nextQuestion}>Next</button>
         </>}
         

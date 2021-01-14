@@ -44,7 +44,13 @@ window.onload = function() {
                 window.location.href = window.location.href + "&game=" + game;
             };
             if(game == "AudioWordMatch" || game == "TestMe" || game == "Alphabetize") {
-                var maxQuestions = (game == "AudioWordMatch" ? 9 : 20);
+                var maxQuestions = 0;
+                if(game == "AudioWordMatch")
+                    maxQuestions = 9;
+                else if(game == "TestMe")
+                    maxQuestions = 20;
+                else if(game == "Alphabetize")
+                    maxQuestions = 8;
                 if((window as any).spellingQuestions.length > maxQuestions) {
                     shuffle((window as any).spellingQuestions);
                     (window as any).spellingQuestions = (window as any).spellingQuestions.slice(0, maxQuestions);
