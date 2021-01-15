@@ -9,6 +9,8 @@ import AudioWordMatch from './AudioWordMatch';
 import Alphabetize from './Alphabetize';
 import shuffle from './shuffle';
 import { readWord } from './talking';
+import SyllableTest from './SyllableTest';
+
 
 function getParameterByName(name: string, url = window.location.href): string|null {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -76,7 +78,8 @@ window.onload = function() {
                 </div>
             } else if(game == "Alphabetize") {
                 return <Alphabetize/>;
-            }
+            } else if(game == "SyllableTest")
+                return <SyllableTest/>;
             else
                 return <>
                     <h1>Choose a game:</h1>
