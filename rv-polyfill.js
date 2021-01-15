@@ -48,6 +48,7 @@ if('speechSynthesis' in window) {
         speak: function(text, voice, parameters) {
             if(typeof parameters == 'undefined')
                 parameters = {};
+            console.log(text);
             var utter = new SpeechSynthesisUtterance(text);
             for(i = 0; i < voices.length ; i++) {
                 if((voices[i].name.includes(voice)) || voices[i].name.toLowerCase().includes("female") && voices[i].lang.startsWith("en-")) {
@@ -61,15 +62,18 @@ if('speechSynthesis' in window) {
             });
             var triggered = false;
             function onend() {
+                if(triggered)
+                    return;
                 triggered = true;
-                console.log("Hello");
                 if(typeof parameters.onend == 'function')
                     parameters.onend();
             }
             utter.onend = onend;
-            setTimeout(() => {
-                if(!triggered)
+            setTimeout(function () {
+                if(!triggered) {
+                    console.log("force on end");
                     onend();
+                }
             }, ((text.split(" ").length / 1.8) * 1000) + 750);
             synth.speak(utter);
             console.log(synth.speaking);

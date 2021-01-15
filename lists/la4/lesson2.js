@@ -11,6 +11,19 @@ var list = [
     'weeding'
 ];
 
+var syllableNums = [
+    2,
+    1,
+    2,
+    1,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2
+]
+
 var sentences = [
     'I listened to the rhythm of the song.',
     'He used a cane to help him stand up.',
