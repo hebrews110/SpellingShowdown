@@ -6,6 +6,12 @@ var queue = new Queue();
 
 
 var loadingElement: HTMLDivElement = null;
+
+var myAudioElement = document.createElement("audio");
+var sourceElement = document.createElement("source");
+sourceElement.src = "data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA==";
+myAudioElement.appendChild(sourceElement);
+
 function readWord(word, cb?: () => void) {
     if(loadingElement == null) {
         loadingElement = document.createElement("div");
@@ -33,6 +39,8 @@ function readWord(word, cb?: () => void) {
             this.next();
         }
         console.log("starting speech", word);
+        myAudioElement.muted = true;
+        myAudioElement.play();
         if(word.trim().length == 0) {
             handleEnd();
         } else {
@@ -44,17 +52,41 @@ function readWord(word, cb?: () => void) {
                 redirect: 'follow', // manual, *follow, error
                 referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             }).then(response => response.blob()).then(blob => {
-                var audio = new Audio(URL.createObjectURL(blob));
-                audio.addEventListener('canplaythrough', function() { 
+                myAudioElement.pause();
+                myAudioElement.currentTime = 0;
+                myAudioElement.muted = false;
+                // All browsers, except Firefox
+                try {
+                    sourceElement.src  = webkitURL.createObjectURL(blob);
+                }
+                // Firefox
+                catch(err) {
+                    sourceElement.src = URL.createObjectURL(blob);
+                }
+                sourceElement.type = "audio/mp3";
+                console.log("data loaded, attempt to start playback");
+                function canplaythrough() { 
+                    myAudioElement.removeEventListener("canplaythrough", canplaythrough);
+                    console.log("canplaythrough");
                     loadingElement.style.display = "none";
-                    audio.addEventListener("ended", () => {
+                    function ended() {
+                        myAudioElement.removeEventListener("ended", ended);
+                        console.log("ended");
                         handleEnd();
-                    });
-                    audio.play();
-                });
-                audio.addEventListener("error", () => {
+                    }
+                    myAudioElement.addEventListener("ended", ended);
+                    myAudioElement.muted = false;
+                    myAudioElement.play();
+                }
+                const err = () => {
+                    myAudioElement.removeEventListener("error", err);
+                    console.log("err");
                     handleEnd();
-                });
+                };
+                myAudioElement.addEventListener('canplaythrough', canplaythrough);
+                myAudioElement.addEventListener("error", err);
+                myAudioElement.muted = false;
+                myAudioElement.load();
             }).catch(() => {
                 handleEnd();
             });
