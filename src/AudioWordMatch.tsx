@@ -28,6 +28,11 @@ export default function AudioWordMatch() {
         shuffle(cards);
         cardsFlipped.current.fill(false, 0, cards.length);
         newlyFlipped.current.fill(false, 0, cards.length);
+        (async function() {
+            for(var i = 0; i < (window as any).spellingQuestions.length; i++) {
+                await new Promise<void>(resolve => readWord((window as any).spellingQuestions[i].name, resolve, true));
+            }
+        })();
         return cards;
     }, [ (window as any).spellingQuestions ]);
     useEffect(() => {
@@ -50,6 +55,7 @@ export default function AudioWordMatch() {
     const finished = newlyFlipped.current.indexOf(true) == -1 && cardsFlipped.current.filter(e => e).length == cards.length;
     useEffect(() => {
         if(finished) {
+            readWord("Awesome work!", null, true);
             setTimeout(() => readWord("Awesome work!"), 1000);
         }
     }, [ finished ]);

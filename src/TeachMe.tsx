@@ -14,6 +14,10 @@ const WordTeach = props => {
             {shownIndex == -1 && !props.disabled && <a href="#" onClick={async(e) => {
                 e.preventDefault();
                 props.onClick();
+                for(var i = 0; i < props.word.length; i++) {
+                    readWord(props.word[i], null, true);
+                }
+                readWord(props.sentence, null, true);
                 await new Promise<void>(resolve => readWord(props.word, resolve));
                 for(var i = 0; i < props.word.length; i++) {
                     setShownIndex(i);

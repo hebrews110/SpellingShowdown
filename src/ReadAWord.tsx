@@ -13,8 +13,12 @@ export default function ReadAWord() {
     const optionsDisabled = useRef<boolean[]>([]);
     const [ ready, setReady ] = useState(false);
     useEffect(() => {
-        if(ready)
+        if(ready) {
             readWord("Let's get started!");
+            readWord("Good job!", null, true);
+            readWord("Try again!", null, true);
+        } else
+            readWord("Let's get started!", null, true);
     }, [ ready ]);
     useEffect(() => {
         if(!ready)
@@ -23,6 +27,8 @@ export default function ReadAWord() {
             inputRef.current.focus();
         if(question < (window as any).spellingQuestions.length) {
             readWord((window as any).spellingQuestions[question].name);
+            if(question < ((window as any).spellingQuestions.length-1))
+                readWord((window as any).spellingQuestions[question+1].name, null, true);
         }
     }, [ question, ready ]);
     const q = (window as any).spellingQuestions[question];
