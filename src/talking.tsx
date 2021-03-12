@@ -1,6 +1,6 @@
 
-import 'talkify-tts/dist/talkify.min.js';
 import Queue from 'js-queue';
+import { Howl, Howler } from 'howler';
 
 var queue = new Queue();
 
@@ -12,7 +12,12 @@ var sourceElement = document.createElement("source");
 sourceElement.src = "data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA==";
 myAudioElement.appendChild(sourceElement);
 
-function readWord(word, cb?: () => void) {
+
+var localSpeechCache = {};
+
+
+
+function readWord(word, cb?: () => void, prefetch = false) {
     if(loadingElement == null) {
         loadingElement = document.createElement("div");
         loadingElement.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
@@ -28,71 +33,75 @@ function readWord(word, cb?: () => void) {
         loadingElement.style.width = "100%";
         loadingElement.style.height = "100%";
         loadingElement.style.zIndex = "10000";
-        loadingElement.textContent = "Loading speech file...";
         document.body.appendChild(loadingElement);
     }
-    queue.add(function() {
-        const handleEnd = () => {
-            loadingElement.style.display = "none";
+    const task = function() {
+        const handleEnd = (id, e) => {
+            if(!prefetch && word.trim().length > 0) {
+                console.log("remove handlers on " + word);
+                localSpeechCache[word].off('loaderror');
+                localSpeechCache[word].off('playerror');
+                localSpeechCache[word].off('end');
+            }
+            if(!prefetch)
+                console.log("end handled");
+            if(typeof e != 'undefined')
+                console.error(e);
+            if(!prefetch)
+                loadingElement.style.display = "none";
             if(typeof cb == 'function')
                 cb();
-            this.next();
+            if(!prefetch)
+                this.next();
         }
-        console.log("starting speech", word);
-        myAudioElement.muted = true;
-        myAudioElement.play();
+        if(!prefetch) {
+            console.log("starting speech", word + (prefetch ? " (prefetch)" : ""));
+            myAudioElement.muted = true;
+            myAudioElement.play().catch(e => {
+                console.log("cancelled fake play");
+            });
+        }
         if(word.trim().length == 0) {
-            handleEnd();
+            handleEnd(undefined, undefined);
         } else {
             var url = new URL("https://epallinone.com/quizzes/speech/");
             url.searchParams.append("text", word);
-            loadingElement.style.display = "flex";
-            fetch(url as any, {
-                credentials: 'same-origin', // include, *same-origin, omit
-                redirect: 'follow', // manual, *follow, error
-                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            }).then(response => response.blob()).then(blob => {
-                myAudioElement.pause();
-                myAudioElement.currentTime = 0;
-                myAudioElement.muted = false;
-                // All browsers, except Firefox
-                try {
-                    sourceElement.src  = webkitURL.createObjectURL(blob);
-                }
-                // Firefox
-                catch(err) {
-                    sourceElement.src = URL.createObjectURL(blob);
-                }
-                sourceElement.type = "audio/mp3";
-                console.log("data loaded, attempt to start playback");
-                function canplaythrough() { 
-                    myAudioElement.removeEventListener("canplaythrough", canplaythrough);
-                    console.log("canplaythrough");
+            var tmout = null;
+            if(typeof localSpeechCache[word] == 'undefined') {
+                /* Create the howl */
+                var sound = new Howl({
+                    src: [url.href],
+                    format: ["mp3"],
+                    preload: true,
+                    onload: prefetch ? () => handleEnd(undefined, undefined) : undefined
+                });
+                localSpeechCache[word] = sound;
+            } else if(prefetch)
+                handleEnd(undefined, undefined);
+            
+            if(!prefetch) {
+                var timeout = setTimeout(() => {
+                    loadingElement.innerHTML = "<p>Loading speech file...</p>" + ((Howler as any)._audioUnlocked ? "" : "<p>Please tap the screen to allow audio playback.</p>");
+                    loadingElement.style.display = "flex";
+                }, 50);
+                localSpeechCache[word].once("play", () => {
+                    clearTimeout(timeout);
                     loadingElement.style.display = "none";
-                    function ended() {
-                        myAudioElement.removeEventListener("ended", ended);
-                        console.log("ended");
-                        handleEnd();
-                    }
-                    myAudioElement.addEventListener("ended", ended);
-                    myAudioElement.muted = false;
-                    myAudioElement.play();
-                }
-                const err = () => {
-                    myAudioElement.removeEventListener("error", err);
-                    console.log("err");
-                    handleEnd();
-                };
-                myAudioElement.addEventListener('canplaythrough', canplaythrough);
-                myAudioElement.addEventListener("error", err);
-                myAudioElement.muted = false;
-                myAudioElement.load();
-            }).catch(() => {
-                handleEnd();
-            });
+                });
+                console.log("HOWL");
+                localSpeechCache[word].once("loaderror", handleEnd);
+                localSpeechCache[word].once("playerror", handleEnd);
+                //localSpeechCache[word].once("stop", handleEnd);
+                localSpeechCache[word].once("end", handleEnd);
+                localSpeechCache[word].play();
+            }
         }
         
-    });
+    };
+    if(!prefetch)
+        queue.add(task);
+    else
+        task();
 }
 
 export { readWord };

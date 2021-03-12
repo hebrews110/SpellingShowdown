@@ -75,6 +75,13 @@ export default function Alphabetize() {
         setItems(newItems);
     };
     useEffect(() => {
+        (async function() {
+            for(var i = 0; i < (window as any).spellingQuestions.length; i++) {
+                await new Promise<void>(resolve => readWord((window as any).spellingQuestions[i].name, resolve, true));
+            }
+        })();
+    }, []);
+    useEffect(() => {
         if(!correct)
             return;
         var ind = setTimeout(() => {

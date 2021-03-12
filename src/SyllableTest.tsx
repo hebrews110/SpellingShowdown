@@ -19,6 +19,13 @@ export default function SyllableTest() {
     const sayQuestion = () => {
         if(question < (window as any).spellingQuestions.length) {
             readWord("How many syllables does, \"" + q.name + "\", have?");
+            /* prefetch */
+            readWord("Excellent!", null, true);
+            readWord("Nice work!", null, true);
+            readWord("Not quite. Try again!", null, true);
+            if(question < ((window as any).spellingQuestions.length - 1)) {
+                readWord("How many syllables does, \"" + (window as any).spellingQuestions[question+1].name + "\", have?", null, true);
+            }
         }
     };
     useEffect(() => {

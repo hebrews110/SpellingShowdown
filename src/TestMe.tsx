@@ -24,6 +24,9 @@ export default function TestMe() {
         (window as any).responsiveVoice.cancel();
         if(question < (window as any).spellingQuestions.length) {
             readWord((window as any).spellingQuestions[question].name);
+            readWord((window as any).spellingQuestions[question].sentence, null, true);
+            if(question < ((window as any).spellingQuestions.length-1))
+                readWord((window as any).spellingQuestions[question+1].name, null, true);
         }
     }, [ question, ready ]);
     if(showingCorrect) {

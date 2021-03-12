@@ -28,6 +28,11 @@ export default function ReadAWord() {
             inputRef.current.focus();
         if(question < (window as any).spellingQuestions.length) {
             readWord((window as any).spellingQuestions[question].name);
+            readWord("Good job!", null, true);
+            readWord("Try again!", null, true);
+            if(question < ((window as any).spellingQuestions.length - 1)) {
+                readWord((window as any).spellingQuestions[question+1].name, null, true);
+            }
         }
     }, [ question, ready ]);
     const q = (window as any).spellingQuestions[question];
@@ -41,7 +46,7 @@ export default function ReadAWord() {
         for(var i = 0; i < 3; i++) {
             do {
                 letter = getRandomLetter();
-            } while(options.indexOf(setCharAt(q.name, missingIndex, letter)) != -1);
+            } while(options.indexOf(setCharAt(q.name, missingIndex, letter)) != -1 || letters.indexOf(letter) != -1);
             letters.push(letter);
         }
         letters.push(q.name.charAt(missingIndex));
@@ -77,7 +82,7 @@ export default function ReadAWord() {
         </>}
         {ready && <>
             <h1 className="word-choice">{setCharAt(q.name, missingIndex, '_')}</h1>
-            {options.map((option, i) => <button disabled={optionsDisabled.current[i]} className="word-choice" onClick={checkButton.bind(void 0, i)} key={option}>{option}</button>)}
+                {options.map((option, i) => <button disabled={optionsDisabled.current[i]} className="word-choice" onClick={checkButton.bind(void 0, i)} key={q.name + ' ' + option + i}>{option}</button>)}
             <br/>
             <ReaderButton word={q.name}>Word</ReaderButton>
             <ReaderButton word={q.sentence}>Sentence</ReaderButton>
