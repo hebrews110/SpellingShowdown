@@ -69,7 +69,6 @@ var sentences = [
     "Please stop trying to belittle the situation.",
     "Cologne has a very strong scent.",
     "The carburetor is malfunctioning.",
-    "There are a number of baubles around the house.",
     "Someone brought a basin to the area.",
     "Everyone had a common interest in mind.",
     "Mom strained the beans using a colander.",
