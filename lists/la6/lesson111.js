@@ -29,6 +29,7 @@ var list = [
     'belittle',
     'cologne',
     'carburetor',
+    'bauble',
     'basin',
     'common',
     'colander',
