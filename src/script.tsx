@@ -95,7 +95,10 @@ window.onload = function() {
         }
         ReactDOM.render(<App/>, document.getElementById("game-container"));
     };
-    script.src = 'lists/' + list;
+    if(/^https?:/.test(list))
+        script.src = list;
+    else
+        script.src = 'lists/' + list;
     document.head.appendChild(script);
     
 }
