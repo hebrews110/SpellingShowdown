@@ -104,4 +104,17 @@ function readWord(word, cb?: () => void, prefetch = false) {
         task();
 }
 
-export { readWord };
+/**
+ * Spell out the letters of a word to the user.
+ * @param word The word to spell out
+ * @param prefetchOnly Whether the word should actually be read, or just prefetched
+ */
+async function spellWord(word: string, prefetchOnly = false) {
+    for(var i = 0; i < word.length; i++) {
+        const prom = new Promise<void>(resolve => readWord(word[i], resolve, prefetchOnly));
+        if(!prefetchOnly)
+            await prom; /* wait for one letter to be spoken before moving to the next */
+    }
+}
+
+export { readWord, spellWord };

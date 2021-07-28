@@ -49,6 +49,7 @@
     "react": "17",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "17",
+    "react-use-object-state": "^1.1.4",
     "short-hash": "^1.0.0",
     "talkify-tts": "^3.6.0",
     "use-force-update": "^1.0.7"
