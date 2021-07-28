@@ -108,8 +108,10 @@ export default function ReadAWord() {
         if(wasAMissingIndex && numberMissingBeforeClick == 1) {
             answersRef.current.push(q.name);
             readWord("Good job!");
-            setQuestion(question + 1);
-            setNumAttempts(0);
+            setTimeout(() => {
+                setQuestion(question + 1);
+                setNumAttempts(0);
+            }, 2000);
         }
         if(!wasAMissingIndex) {
             console.log("Force update", buttonIndex);
@@ -139,7 +141,7 @@ export default function ReadAWord() {
         </>}
         {ready && <>
             <h1 className="word-choice">{mangledName}</h1>
-            {options.map((option, i) => <button className="word-choice" onClick={checkButton.bind(void 0, i)} key={q.name + ' ' + option + i}>{option}</button>)}
+            {options.map((option, i) => <button disabled={missingIndices.state.length == 0} className="word-choice" onClick={checkButton.bind(void 0, i)} key={q.name + ' ' + option + i}>{option}</button>)}
             <br/>
             <ReaderButton word={q.name}>Word</ReaderButton>
             <ReaderButton word={q.sentence}>Sentence</ReaderButton>
