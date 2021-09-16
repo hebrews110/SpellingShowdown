@@ -127,13 +127,20 @@ export default function ReadAWord() {
             forceUpdate();
         }
     };
+    let pointsString = null;
     if(question >= (window as any).spellingQuestions.length) {
         let points = answersRef.current.length;
         const numQs = (window as any).spellingQuestions.length;
-        const pointsString = `You got ${points} out of ${numQs} points! That's ${Math.round((points/numQs)*100)}%!`;
-        readWord(pointsString);
-        return <b>{pointsString}</b>;
+        pointsString = `You got ${points} out of ${numQs} points! That's ${Math.round((points/numQs)*100)}%!`;
     }
+    useEffect(() => {
+        if(pointsString != null) {
+            readWord(pointsString);
+        }
+    }, [pointsString]);
+    if(pointsString != null)
+        return <b>{pointsString}</b>;
+    
     return <div className="spelling-test-question">
         {!ready && <>
             <h1>Ready?</h1>
