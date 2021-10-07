@@ -73,6 +73,7 @@ function readWord(word, cb?: () => void, prefetch = false) {
                     src: [url.href],
                     format: ["mp3"],
                     preload: true,
+                    html5: true,
                     onload: prefetch ? () => handleEnd(undefined, undefined) : undefined
                 });
                 localSpeechCache[word] = sound;
