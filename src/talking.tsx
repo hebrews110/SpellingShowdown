@@ -56,10 +56,15 @@ function readWord(word, cb?: () => void, prefetch = false) {
         }
         if(!prefetch) {
             console.log("starting speech", word + (prefetch ? " (prefetch)" : ""));
-            myAudioElement.muted = true;
-            myAudioElement.play().catch(e => {
-                console.log("cancelled fake play");
-            });
+            if(myAudioElement != null) {
+                myAudioElement.muted = true;
+                const p = myAudioElement.play();
+                if(p != null)
+                    p.catch(e => {
+                        console.log("cancelled fake play");
+                    });
+            }
+            
         }
         if(word.trim().length == 0) {
             handleEnd(undefined, undefined);
