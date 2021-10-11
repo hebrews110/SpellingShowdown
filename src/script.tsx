@@ -10,16 +10,9 @@ import Alphabetize from './Alphabetize';
 import shuffle from './shuffle';
 import { readWord } from './talking';
 import SyllableTest from './SyllableTest';
+import getParameterByName from './getParameterByName';
 
 
-function getParameterByName(name: string, url = window.location.href): string|null {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
 const list = getParameterByName("list");
 
 function clickFn() {
@@ -95,7 +88,10 @@ window.onload = function() {
         }
         ReactDOM.render(<App/>, document.getElementById("game-container"));
     };
-    script.src = 'lists/' + list;
+    if(/^https?:/.test(list))
+        script.src = list;
+    else
+        script.src = 'lists/' + list;
     document.head.appendChild(script);
     
 }

@@ -56,10 +56,15 @@ function readWord(word, cb?: () => void, prefetch = false) {
         }
         if(!prefetch) {
             console.log("starting speech", word + (prefetch ? " (prefetch)" : ""));
-            myAudioElement.muted = true;
-            myAudioElement.play().catch(e => {
-                console.log("cancelled fake play");
-            });
+            if(myAudioElement != null) {
+                myAudioElement.muted = true;
+                const p = myAudioElement.play();
+                if(p != null)
+                    p.catch(e => {
+                        console.log("cancelled fake play");
+                    });
+            }
+            
         }
         if(word.trim().length == 0) {
             handleEnd(undefined, undefined);
@@ -73,6 +78,7 @@ function readWord(word, cb?: () => void, prefetch = false) {
                     src: [url.href],
                     format: ["mp3"],
                     preload: true,
+                    html5: true,
                     onload: prefetch ? () => handleEnd(undefined, undefined) : undefined
                 });
                 localSpeechCache[word] = sound;
@@ -104,4 +110,17 @@ function readWord(word, cb?: () => void, prefetch = false) {
         task();
 }
 
-export { readWord };
+/**
+ * Spell out the letters of a word to the user.
+ * @param word The word to spell out
+ * @param prefetchOnly Whether the word should actually be read, or just prefetched
+ */
+async function spellWord(word: string, prefetchOnly = false) {
+    for(var i = 0; i < word.length; i++) {
+        const prom = new Promise<void>(resolve => readWord(word[i], resolve, prefetchOnly));
+        if(!prefetchOnly)
+            await prom; /* wait for one letter to be spoken before moving to the next */
+    }
+}
+
+export { readWord, spellWord };
