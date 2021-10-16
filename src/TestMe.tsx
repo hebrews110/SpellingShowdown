@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { readWord } from './talking';
 import ReaderButton from './ReaderButton';
-
+import ReactCanvasInput from './ReactCanvasInput';
 
 export default function TestMe() {
     const [ question, setQuestion ] = useState(0);
     const answersRef = useRef([]);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef(null);
     const [ showingCorrect, setShowingCorrect ] = useState(false);
     const [ ready, setReady ] = useState(false);
     const nextQuestion = () => {
@@ -74,7 +74,7 @@ export default function TestMe() {
         </>}
         {ready && <>
             <h3>({question+1} of {(window as any).spellingQuestions.length}) Type the word you hear into the box below, then click Next.</h3>
-            <input type="text" ref={inputRef} name="answer-search" placeholder="Word" autoComplete="off" autoCapitalize="off" autoCorrect="off" spellCheck="false"/>
+            <ReactCanvasInput ref={inputRef} placeholder="Word"/>
             <br/>
             <ReaderButton onClick={() => inputRef.current.focus()} word={q.name}>Word</ReaderButton>
             <ReaderButton onClick={() => inputRef.current.focus()} word={q.sentence}>Sentence</ReaderButton>
