@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { readWord } from './talking';
 import ReaderButton from './ReaderButton';
 import ReactCanvasInput from './ReactCanvasInput';
+import { normalizeInput } from './normalizeInput';
 
 export default function TestMe() {
     const [ question, setQuestion ] = useState(0);
@@ -12,7 +13,7 @@ export default function TestMe() {
     const nextQuestion = () => {
         if(inputRef.current.value.trim().length == 0)
             return;
-        answersRef.current.push(inputRef.current.value);
+        answersRef.current.push(normalizeInput(inputRef.current.value, true));
         inputRef.current.value = "";
         setQuestion(question + 1);
     };
