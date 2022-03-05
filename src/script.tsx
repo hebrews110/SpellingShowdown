@@ -26,6 +26,9 @@ window.onload = function() {
     script.onload = function() {
         if(typeof (window as any).spellingQuestions == 'undefined') {
             (window as any).spellingQuestions = [];
+            if((window as any).list.length != (window as any).sentences.length) {
+                window.alert("List and sentences lengths do not match, please ask someone to fix this");
+            }
             for(var i = 0; i < (window as any).list.length; i++) {
                 (window as any).spellingQuestions.push({ name: (window as any).list[i], sentence: (window as any).sentences[i] });
             }
