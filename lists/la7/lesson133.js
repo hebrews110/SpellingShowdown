@@ -1,7 +1,6 @@
 var list = [
     'acres',
     'adjustable',
-    'afghan',
     'analysis',
     'artificial',
     'absolutely',

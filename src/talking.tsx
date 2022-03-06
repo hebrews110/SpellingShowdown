@@ -18,6 +18,13 @@ var localSpeechCache = {};
 
 
 function readWord(word, cb?: () => void, prefetch = false) {
+    if(word == null) {
+        if(process.env.NODE_ENV == 'production')
+            console.warn("word should not be null");
+        else
+            throw new Error("word should not be null");
+        return;
+    }
     if(loadingElement == null) {
         loadingElement = document.createElement("div");
         loadingElement.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
