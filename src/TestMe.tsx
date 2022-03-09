@@ -5,7 +5,7 @@ import ReactCanvasInput from './ReactCanvasInput';
 import { normalizeInput } from './normalizeInput';
 
 export default function TestMe() {
-    const [ question, setQuestion ] = useState(16);
+    const [ question, setQuestion ] = useState(0);
     const answersRef = useRef([]);
     const inputRef = useRef(null);
     const [ showingCorrect, setShowingCorrect ] = useState(false);
